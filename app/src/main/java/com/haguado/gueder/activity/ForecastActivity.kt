@@ -1,7 +1,8 @@
-package com.haguado.gueder
+package com.haguado.gueder.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.haguado.gueder.R
 
 
 class ForecastActivity : AppCompatActivity() {

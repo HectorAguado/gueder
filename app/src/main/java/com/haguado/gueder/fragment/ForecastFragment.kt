@@ -1,11 +1,11 @@
 package com.haguado.gueder.fragment
 
 import android.app.Activity
-import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.view.*
 import com.haguado.gueder.model.Forecast
 import com.haguado.gueder.R
@@ -13,6 +13,7 @@ import com.haguado.gueder.model.TemperatureUnit
 import com.haguado.gueder.activity.SettingsActivity
 import com.haguado.gueder.model.City
 import kotlinx.android.synthetic.main.fragment_forecast.*
+
 
 class ForecastFragment: Fragment() {
 
@@ -63,29 +64,25 @@ class ForecastFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // indicar que este fragment publica opciones de menú
+
+        // indicar que este fragment publica opciones de menú
         setHasOptionsMenu(true)
     }
     //cargar la interfaz de este fragment
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater?.inflate(R.layout.fragment_forecast, container, false)!!
+        return inflater.inflate(R.layout.fragment_forecast, container, false)!!
     }
+
+
     //aqui ya podemos tocar la interfaz, y podemos acceder al setter
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(arguments != null){
-            val city:City = arguments.getSerializable(ARG_CITY) as City
-            forecast = city.forecast
-        }
-//        forecast = Forecast(
-//                25f,
-//                10f,
-//                35f,
-//                "Soleado con alguna nube",
-//                R.drawable.ico_01)
+        val city = arguments?.getSerializable(ARG_CITY) as City
+        forecast = city.forecast
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -96,7 +93,7 @@ class ForecastFragment: Fragment() {
             R.id.menu_show_settings -> {
                 // Lanzaremos la pantalla de ajustes, indicando que nos devolverá datos
                 startActivityForResult(
-                        SettingsActivity.intent(activity, units),
+                        SettingsActivity.intent(activity!!, units),
                         REQUEST_SETTINGS)
 
                 return true
@@ -126,7 +123,7 @@ class ForecastFragment: Fragment() {
                     val newUnitsString = if (newUnits == TemperatureUnit.CELSIUS) "Usuario seleccionó Celsius"
                     else "Usuario seleccionó Fahrenheit"
 //                    Toast.makeText(this, newUnitsString, Toast.LENGTH_LONG).show()
-                    Snackbar.make(view, newUnitsString, Snackbar.LENGTH_LONG)
+                    Snackbar.make(view!!, newUnitsString, Snackbar.LENGTH_LONG)
                             .setAction("Deshacer", View.OnClickListener {
                                 PreferenceManager.getDefaultSharedPreferences(activity)
                                         .edit()
