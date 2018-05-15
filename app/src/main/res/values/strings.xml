@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Gueder</string>
+    <string name="offline_image_description">predicción meteorológica offline</string>
+    <string name="european_system_button">Sistema Europeo</string>
+    <string name="american_system_button">Sistema Americano</string>
+    <string name="forecast_description">soleado con nubes</string>
+    <string name="max_temp_format">Max: %.2fº</string>
+    <string name="min_temp_format">Max: %.2fº</string>
+    <string name="humidity_format">Max: %.0f%%</string>
+    <string name="select_units_text">Selecciona las unidades:</string>
+    <string name="celsius_units">Unidades Celsius</string>
+    <string name="farenheit_units">Unidades Farenheit</string>
+    <string name="settings">Ajustes</string>
+</resources>
