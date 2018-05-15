@@ -137,6 +137,14 @@ class ForecastFragment: Fragment() {
             }
         }
     }
+
+    // devuelve si el fragment es visible para el usuario
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser && forecast != null) {
+            updateTemperatureView()
+        }
+    }
     // Aquí actualizaremos la interfaz con las temperaturas
     fun updateTemperatureView() {
         val unitsString = units2String()
