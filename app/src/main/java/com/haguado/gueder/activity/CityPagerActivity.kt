@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.PagerAdapter
+import android.support.v4.view.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 //import android.support.v13.app.FragmentPagerAdapter
@@ -16,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_city_pager.*
 
 class CityPagerActivity : AppCompatActivity() {
 
+    private val cities = Cities()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_pager)
@@ -24,8 +27,6 @@ class CityPagerActivity : AppCompatActivity() {
         // Personalizar toolbar
         toolbar.setLogo(R.mipmap.ic_launcher_round)
         setSupportActionBar(toolbar) // hacer que una tollbar hace de actionBar
-
-        val cities = Cities()
 
         val adapter = object: FragmentPagerAdapter(supportFragmentManager) {
             override fun getItem(position: Int): Fragment {
@@ -44,6 +45,21 @@ class CityPagerActivity : AppCompatActivity() {
         }
 
         view_pager.adapter = adapter
+
+        view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {}
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {
+                updateCityInfo(position)
+            }
+        })
+        updateCityInfo(0)
+    }
+
+    private fun updateCityInfo(position: Int){
+        supportActionBar?.title = cities.getCity(position).name
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -74,7 +90,7 @@ class CityPagerActivity : AppCompatActivity() {
         previousMenu?.isEnabled = view_pager.currentItem > 0
         nextMenu?.isEnabled = view_pager.currentItem < adapter.count - 1
 
-        
+
         return true
     }
 
