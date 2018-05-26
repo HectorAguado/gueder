@@ -7,14 +7,9 @@
     tools:context=".activity.ForecastActivity">
 
     <FrameLayout
-        android:id="@+id/city_list_fragment"
+        android:id="@+id/view_pager_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
 
 </FrameLayout>
-    <!--<fragment-->
-    <!--android:id="@+id/forecast_fragment"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:name="com.haguado.gueder.fragment.CityListFragment"/>-->

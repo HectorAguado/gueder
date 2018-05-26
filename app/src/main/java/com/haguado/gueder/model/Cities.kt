@@ -2,7 +2,8 @@ package com.haguado.gueder.model
 
 import com.haguado.gueder.R
 
-class Cities {
+//object, indicamos que se puede acceder a esta clase como si fuera un único objeto, osea, un SINGLETON
+object Cities {
 
     private val cities: List<City> = listOf(
             City("Madrid", Forecast(25f, 10f, 35f, "Soleado con alguna nube", R.drawable.ico_02 )),
@@ -14,5 +15,9 @@ class Cities {
         get() = cities.size
 
     fun getCity(index: Int) = cities[index]
+
+    operator fun get(index: Int) = cities[index]  // sobrecarga del operador corchete
+
+    fun toArray() = cities.toTypedArray() // toTypedArray es un método de las listas para convertirla en un array
 
 }

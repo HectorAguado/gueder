@@ -2,16 +2,52 @@ package com.haguado.gueder.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.ViewGroup
 import com.haguado.gueder.R
+import com.haguado.gueder.fragment.CityListFragment
+import com.haguado.gueder.model.City
 
 
-class ForecastActivity : AppCompatActivity() {
+class ForecastActivity : AppCompatActivity(), CityListFragment.OnCitySelectedListener {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forecast)
-    }
 
+
+        // Averiguamos qué interfaz hemos cargado.
+        // Preguntando si en la interfaz tenemos un FramLayout concreto
+        if (findViewById<ViewGroup>(R.id.city_list_fragment) != null){
+            if (supportFragmentManager.findFragmentById(R.id.city_list_fragment) == null){
+                // añadimos el fragment de forma dinámica
+                val fragment = CityListFragment.newInstance()
+
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.city_list_fragment, fragment)
+                        .commit()
+            }
+
+        }
+
+        if(findViewById<ViewGroup>(R.id.))
+        //
+
+
+//        // Comprobamos primero que no tenemos ya añadido el fragment a nuestra jerarquía
+//        if (supportFragmentManager.findFragmentById((R.id.city_list)) == null) {
+//            // Añadimos fragment de forma dinámica
+//            val fragment = CityListFragment.newInstance()
+//
+//            supportFragmentManager.beginTransaction()
+//                    .add(R.id.city_list_fragment, fragment) // mete el fragment en el hueco que le he dejado en la vista
+//                    .commit() // lo muestra en pantalla
+//        }
+    }
+    override fun onCitySelected(city: City, position: Int) {
+        val intent = CityPagerActivity.intent(this, position)
+        startActivity(intent)
+    }
 
 }
 //
